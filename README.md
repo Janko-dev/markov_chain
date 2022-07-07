@@ -6,7 +6,7 @@ This repository contains examples of Markov chain state machines and their appli
 $ git clone https://github.com/Janko-dev/Markov_Chain.git
 $ cd Markov_Chain/Word_generation
 $ make
-$ ./wren -d <filepath> <num_generated_words>
+$ ./wgen -d <filepath> <num_generated_words>
 ```
 - `-d` flag is an optional flag that enables debug output (like printing the calculated transition matrix)
 - `<filepath>` is the file path parameter that is used to read the training data for the model. Provide a correct filepath that contains a list of words seperated by **line breaks**.

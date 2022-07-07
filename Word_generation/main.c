@@ -15,10 +15,6 @@ int asIndex(char c){
 
 int string_to_int(char* str){
     int res = 0;
-    // if (str[0] == '-'){
-    //     fprintf(stderr, "The NUM_WORDS_GENERATED argument must be a positive integer");
-    //     exit(1);
-    // }
     for (int i = 0; str[i] != '\0'; i++){
         if (str[i] < '0' || str[i] > '9'){
             fprintf(stderr, "The NUM_WORDS_GENERATED argument must be a positive integer");
@@ -31,7 +27,6 @@ int string_to_int(char* str){
 
 int main(int argc, char** argv){
     
-    // ./wgen -d datasets/pokemon_names.txt 20
     if (argc < 2) {
         fprintf(stderr, "Please provide the necessary amount of arguments\n");
         exit(1);
