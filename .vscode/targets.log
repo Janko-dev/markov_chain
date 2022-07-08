@@ -10,20 +10,18 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 make.exe: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Thu Jul  7 10:22:10 2022
+# Make data base, printed on Fri Jul  8 16:33:16 2022
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
- 
 # automatic
 ?F = $(notdir $?)
 # makefile
 MAKEFLAGS = Rrqp
-# environment
-VSCODE_LOG_NATIVE = false
 # automatic
+ 
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
@@ -41,24 +39,22 @@ SHELL := /bin/sh
 WINDIR = C:\WINDOWS
 # environment
 VSCODE_NLS_CONFIG = {"locale":"nl","availableLanguages":{},"_languagePackSupport":true}
+# makefile (from `Makefile', line 2)
+CFLAGS = -Wall -Wextra -g
 # environment
 ONEDRIVE = C:\Users\janba\OneDrive
 # environment
 PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
-# makefile
-MAKEFILE_LIST := 
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
 # environment
 TMP = /tmp
-# environment
-VSCODE_VERBOSE_LOGGING = true
 # environment
 PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-46d06398-1d46-4adc-9622-ce27815265f6-sock
-# environment
-VSCODE_CWD = C:\Users\janba\C-dev\Markov_Chain
+VSCODE_CWD = C:\Users\janba\AppData\Local\Programs\Microsoft VS Code
 # environment
 PATH = /c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/c/Program Files/Microsoft/jdk-11.0.12.7-hotspot/bin:/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/c/WINDOWS/system32:/c/WINDOWS:/c/WINDOWS/System32/Wbem:/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/c/WINDOWS/System32/OpenSSH/:/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/c/Program Files/Git/cmd:/c/Program Files/Docker/Docker/resources/bin:/c/ProgramData/DockerDesktop/version-bin:/c/Program Files/nodejs/:/c/Program Files/dotnet/:/mingw/bin:/usr/bin:/c/Program Files/Git LFS:/c/Users/janba/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.9:/c/Users/janba/AppData/Local/Microsoft/WindowsApps:/c/Users/janba/AppData/Local/Programs/Microsoft VS Code/bin:/usr/bin:/mingw/bin:/c/Users/janba/AppData/Roaming/npm:/c/Users/janba/.dotnet/tools:.
 # environment
@@ -74,8 +70,6 @@ USERPROFILE = C:\Users\janba
 # environment
 ALLUSERSPROFILE = C:\ProgramData
 # environment
-VSCODE_LOG_STACK = false
-# environment
 NUMBER_OF_PROCESSORS = 16
 # environment
 ELECTRON_RUN_AS_NODE = 1
@@ -84,9 +78,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_23368_SPGXEIIMQPVJOGQA
-# environment
-VSCODE_PIPE_LOGGING = true
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_15644_FJYSDLFRZGZCOEJP
 # environment
 COMPUTERNAME = DESKTOP-3AAR4JN
 # environment
@@ -102,7 +94,7 @@ PUBLIC = C:\Users\Public
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-VSCODE_CODE_CACHE_PATH = C:\Users\janba\AppData\Roaming\Code\CachedData\30d9c6cd9483b2cc586687151bcbcd635f373630
+VSCODE_CODE_CACHE_PATH = C:\Users\janba\AppData\Roaming\Code\CachedData\92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
@@ -113,6 +105,8 @@ LOGONSERVER = \\DESKTOP-3AAR4JN
 KINECTSDK10_DIR = C:\Program Files\Microsoft SDKs\Kinect\v1.8\
 # environment
 ONEDRIVECONSUMER = C:\Users\janba\OneDrive
+# makefile (from `Makefile', line 4)
+IN_WORD = word_generator.c
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # environment
@@ -123,10 +117,14 @@ MIC_LD_LIBRARY_PATH = C:\Program Files (x86)\Common Files\Intel\Shared Libraries
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
+# makefile (from `Makefile', line 1)
+CC = gcc
 # default
 MAKE_VERSION := 3.81
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := word
+# makefile (from `Makefile', line 5)
+IN_SENT = sentence_generator.c
 # environment
 PROGRAMFILES(X86) = C:\Program Files (x86)
 # automatic
@@ -148,7 +146,7 @@ PROCESSOR_IDENTIFIER = AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD
 # environment
 OS = Windows_NT
 # environment
-VSCODE_IPC_HOOK = \\.\pipe\37406f71a663a7ded3962ec94234e7b6-1.68.1-main-sock
+VSCODE_IPC_HOOK = \\.\pipe\37406f71a663a7ded3962ec94234e7b6-1.69.0-main-sock
 # environment
 HOMEPATH = \
 # environment
@@ -170,6 +168,8 @@ SYSTEMROOT = C:\WINDOWS
 # environment
 APPDATA = C:\Users\janba\AppData\Roaming
 # environment
+__COMPAT_LAYER = DetectorsAppHealth
+# environment
 TEMP = /tmp
 # environment
 COMSPEC = C:\WINDOWS\system32\cmd.exe
@@ -187,7 +187,6 @@ SUFFIXES :=
 SYSTEMDRIVE = C:
 # environment
 SESSIONNAME = Console
- 
 # environment
 PROCESSOR_REVISION = 7100
 # default
@@ -196,16 +195,17 @@ PROCESSOR_REVISION = 7100
 MAKELEVEL := 0
 # environment
 LANG = C
+ 
 # environment
 PROCESSOR_LEVEL = 23
 # environment
 TERM = cygwin
 # environment
-VSCODE_PID = 23368
+VSCODE_PID = 15644
 # environment
 USERDOMAIN_ROAMINGPROFILE = DESKTOP-3AAR4JN
 # variable set hash-table stats:
-# Load=94/1024=9%, Rehash=0, Collisions=9/116=8%
+# Load=94/1024=9%, Rehash=0, Collisions=9/119=8%
 
 # Pattern-specific Variable Values
 
@@ -213,9 +213,9 @@ USERDOMAIN_ROAMINGPROFILE = DESKTOP-3AAR4JN
 
 # Directories
 
-# . (device -13143, inode 1032615): 9 files, no impossibilities.
+# . (device -13143, inode 1032615): 12 files, no impossibilities.
 
-# 9 files, no impossibilities in 1 directories.
+# 12 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -240,23 +240,28 @@ all:
 
 # Not a target:
 Makefile:
-#  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-08 16:32:32
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-makefile:
-#  A default, MAKEFILES, or -include/sinclude makefile.
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+word:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 8):
+	$(CC) $(IN_WORD) -o wgen $(CFLAGS)  
+	
+
+sent:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 11):
+	$(CC) $(IN_SENT) -o sgen $(CFLAGS)
+	
 
 # Not a target:
 .DEFAULT:
@@ -264,29 +269,19 @@ makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-GNUmakefile:
-#  A default, MAKEFILES, or -include/sinclude makefile.
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/16=0%
+# Load=6/1024=1%, Rehash=0, Collisions=0/17=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
 
 # No general (`VPATH' variable) search path.
 
-# # of strings in strcache: 0
-# # of strcache buffers: 0
-# strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
-# strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Jul  7 10:22:10 2022
+# Finished Make data base on Fri Jul  8 16:33:16 2022
 
  

@@ -17,7 +17,7 @@ int string_to_int(char* str){
     int res = 0;
     for (int i = 0; str[i] != '\0'; i++){
         if (str[i] < '0' || str[i] > '9'){
-            fprintf(stderr, "The NUM_WORDS_GENERATED argument must be a positive integer");
+            fprintf(stderr, "The NUM_WORDS_GENERATED argument must be a positive integer\n");
             exit(1);
         }
         res = 10 * res + (str[i] - '0');
@@ -53,11 +53,6 @@ int main(int argc, char** argv){
     // Setup transition matrix
     srand(time(NULL));
     float transition_matrix[CHAR_SET][CHAR_SET] = {{0}};
-    for (int i = 0; i < CHAR_SET; i++) {
-        for (int j = 0; j < CHAR_SET; j++) {
-            transition_matrix[i][j] = 1.0f;
-        }   
-    }
     
     // Read trainig data
     FILE* f = fopen(file_path, "r");
@@ -83,6 +78,7 @@ int main(int argc, char** argv){
         for (int j = 0; j < CHAR_SET; j++){
             sum += transition_matrix[i][j];
         }
+        if (sum == 0) continue;
         for (int j = 0; j < CHAR_SET; j++){
             transition_matrix[i][j] = transition_matrix[i][j]/sum;
         }
