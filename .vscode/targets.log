@@ -10,7 +10,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 make.exe: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Sat Jul  9 10:51:32 2022
+# Make data base, printed on Sat Jul  9 11:25:14 2022
 
 # Variables
 
@@ -20,6 +20,7 @@ make.exe: *** No rule to make target `all'.  Stop.
 ?F = $(notdir $?)
 # makefile
 MAKEFLAGS = Rrqp
+ 
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
@@ -27,7 +28,6 @@ MAKEFLAGS = Rrqp
 # environment
 HOMEDRIVE = C:
 # automatic
- 
 @F = $(notdir $@)
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
@@ -205,6 +205,7 @@ USERDOMAIN_ROAMINGPROFILE = DESKTOP-3AAR4JN
 # Load=93/1024=9%, Rehash=0, Collisions=9/118=8%
 
 # Pattern-specific Variable Values
+ 
 
 # No pattern-specific variable values.
 
@@ -224,7 +225,6 @@ USERDOMAIN_ROAMINGPROFILE = DESKTOP-3AAR4JN
 all:
 #  Command-line target.
 #  Implicit rule search has been done.
- 
 #  File does not exist.
 #  File has not been updated.
 # variable set hash-table stats:
@@ -239,7 +239,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-09 10:51:30
+#  Last modified 2022-07-09 11:25:11
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -250,7 +250,7 @@ word:
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 8):
-	$(CC) $(IN_WORD) markov.c -o wgen $(CFLAGS)  
+	$(CC) $(IN_WORD) -o wgen $(CFLAGS)  
 	
 
 sent:
@@ -258,7 +258,7 @@ sent:
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 11):
-	$(CC) $(IN_SENT) markov.c -o sgen $(CFLAGS)
+	$(CC) $(IN_SENT) markov_sentence.c -o sgen $(CFLAGS)
 	
 
 # Not a target:
@@ -280,6 +280,6 @@ sent:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Jul  9 10:51:32 2022
+# Finished Make data base on Sat Jul  9 11:25:14 2022
 
  

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
-#include "markov.h"
+#include "markov_sentence.h"
 
 #define MAX_INPUT_SIZE 0xffff 
 #define rnd_float() ((rand() % RAND_MAX)/(float)RAND_MAX)

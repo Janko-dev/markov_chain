@@ -5,7 +5,7 @@ IN_WORD = word_generator.c
 IN_SENT = sentence_generator.c
 
 word:
-	$(CC) $(IN_WORD) markov.c -o wgen $(CFLAGS)  
+	$(CC) $(IN_WORD) -o wgen $(CFLAGS)  
 
 sent:
-	$(CC) $(IN_SENT) markov.c -o sgen $(CFLAGS)
+	$(CC) $(IN_SENT) markov_sentence.c -o sgen $(CFLAGS)

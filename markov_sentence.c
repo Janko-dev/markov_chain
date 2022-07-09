@@ -1,4 +1,4 @@
-#include "markov.h"
+#include "markov_sentence.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -24,6 +24,10 @@ int contains_char(const char* word, char c){
 // read file with filepath and write to output
 void read_file(const char* filepath, char* output, long output_size){
     FILE* f = fopen(filepath, "r");
+    if (f == NULL) {
+        fprintf(stderr, "Can't open file with given path: %s\n", filepath);
+        exit(1);
+    }
     size_t len = fread(output, sizeof(char), output_size, f);
     fclose(f);
     output[len] = '\0';

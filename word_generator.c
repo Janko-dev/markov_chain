@@ -3,13 +3,13 @@
 #include <string.h>
 #include <time.h>
 
-#define CHAR_SET 26
+#define CHAR_SET 27
 #define WORD_LEN 12
-#define NUM_WORDS_GENERATED 20
 
-#define rnd_float ((rand() % RAND_MAX)/(float)RAND_MAX)
+#define rnd_float() ((rand() % RAND_MAX)/(float)RAND_MAX)
 
 int asIndex(char c){
+    if (c == '\n') return CHAR_SET-1;
     return c - 'a';
 }
 
@@ -27,7 +27,7 @@ int string_to_int(char* str){
 
 int main(int argc, char** argv){
     
-    if (argc < 2) {
+    if (argc < 3) {
         fprintf(stderr, "Please provide the necessary amount of arguments\n");
         exit(1);
     }
@@ -46,10 +46,7 @@ int main(int argc, char** argv){
             num_words_generated = string_to_int(*argv);
         }
     }
-    if (debug) 
-        printf("\n--------------------------------------------------\nFilepath: \t\t%s\n# of generated words: \t%d\nDebug mode: \t\t%s\n--------------------------------------------------\n", 
-        file_path, num_words_generated, debug ? "true" : "false");
-
+    
     // Setup transition matrix
     srand(time(NULL));
     float transition_matrix[CHAR_SET][CHAR_SET] = {{0}};
@@ -66,7 +63,8 @@ int main(int argc, char** argv){
 
     // training stage
     while((characters = getline(&input, &buf_size, f)) < buf_size){
-        for (int i = 0; input[i+1] != '\0'; i++){
+        //printf("%s", input);
+        for (int i = 0; (input[i+1] > 'a' && input[i+1] < 'z') || input[i+1] == '\n'; i++){
             transition_matrix[asIndex(input[i])][asIndex(input[i+1])]++;
         }
     }
@@ -84,13 +82,18 @@ int main(int argc, char** argv){
         }
     }
 
-    
     // print
     if (debug){
-        for (int i = 0; i < CHAR_SET; i++) printf("   %c ", i + 'a');
+        printf("\n--------------------------------------------------\n");
+        printf("Filepath: \t\t%s\n# of generated words: \t%d\nDebug mode: \t\t%s",
+        file_path, num_words_generated, debug ? "true" : "false");
+        printf("\n--------------------------------------------------\n");
+        
+        for (int i = 0; i < CHAR_SET; i++) 
+            i == CHAR_SET-1 ? printf("    \\n") : printf("    %c", i + 'a');
         printf("\n");
         for (int i = 0; i < CHAR_SET; i++){
-            printf("%c  ", i + 'a');
+            i == CHAR_SET-1 ? printf("\\n |") : printf("%c  |", i + 'a');
             for (int j = 0; j < CHAR_SET; j++){
                 printf("%2.2f ", transition_matrix[i][j]);
             }
@@ -98,28 +101,42 @@ int main(int argc, char** argv){
         }
     }
 
-    // generate words of length
+    // generate words of length word_len
     printf("\n--------------------------------------------------\n");
-    char string_buffer[128];
-    int word_len;
+    char string_buffer[buf_size];
+
     for (int k = 0; k < num_words_generated; k++){
-        word_len = rand()%WORD_LEN + 2;
-        int state = rand()%CHAR_SET;
-        for (int i = 0; i < word_len; i++){
-            float rnd_choice = rnd_float;
+        int state = rand()%(CHAR_SET-1);
+        //printf("START: %c(%d) ", state + 'a', state);
+        string_buffer[0] = state + 'a';
+        int i = 1;
+        for (; state != CHAR_SET-1; i++){
+            float rnd_choice = rnd_float();
             for (int j = 0; j < CHAR_SET; j++){
                 if (rnd_choice < transition_matrix[state][j]){
-                    string_buffer[i] = j + 'a';
                     state = j;
-                    goto outer;
+                    //printf("%c(%d) ", state + 'a', state);
+                    if (state == CHAR_SET-1) goto end;
+                    
+                    string_buffer[i] = (char)state + 'a';
+                    break;
                 }
                 rnd_choice -= transition_matrix[state][j];
             }
-            outer:;
         }
-        string_buffer[word_len] = '\0';
+        end:;
+        string_buffer[i] = '\0';
         printf("generated word %2d:\t%s\n", k+1, string_buffer);
     }
-    
+
+    // hellolopez
+    // he -> ll
+    // el -> lo
+    // ll -> ol
+    // lo -> lo
+    // ol -> op
+    // lo -> pe
+    // op -> ez
+
     return 0;
 }

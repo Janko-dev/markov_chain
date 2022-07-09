@@ -1,6 +1,7 @@
 {
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
-        "ctype.h": "c"
+        "ctype.h": "c",
+        "markov_sentence.h": "c"
     }
 }

@@ -1,6 +1,6 @@
 make.exe --dry-run --keep-going --print-directory
 make.exe: Entering directory `/c/Users/janba/C-dev/Markov_Chain'
-gcc word_generator.c markov.c -o wgen -Wall -Wextra -g  
+gcc word_generator.c -o wgen -Wall -Wextra -g  
  
 make.exe: Leaving directory `/c/Users/janba/C-dev/Markov_Chain'
  
