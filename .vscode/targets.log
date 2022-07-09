@@ -10,7 +10,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 make.exe: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Fri Jul  8 16:33:16 2022
+# Make data base, printed on Sat Jul  9 10:51:32 2022
 
 # Variables
 
@@ -21,13 +21,13 @@ make.exe: *** No rule to make target `all'.  Stop.
 # makefile
 MAKEFLAGS = Rrqp
 # automatic
- 
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
 HOMEDRIVE = C:
 # automatic
+ 
 @F = $(notdir $@)
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
@@ -54,7 +54,7 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_CWD = C:\Users\janba\AppData\Local\Programs\Microsoft VS Code
+VSCODE_CWD = C:\Users\janba\C-dev\Markov_Chain
 # environment
 PATH = /c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/c/Program Files/Microsoft/jdk-11.0.12.7-hotspot/bin:/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/c/WINDOWS/system32:/c/WINDOWS:/c/WINDOWS/System32/Wbem:/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/c/WINDOWS/System32/OpenSSH/:/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/c/Program Files/Git/cmd:/c/Program Files/Docker/Docker/resources/bin:/c/ProgramData/DockerDesktop/version-bin:/c/Program Files/nodejs/:/c/Program Files/dotnet/:/mingw/bin:/usr/bin:/c/Program Files/Git LFS:/c/Users/janba/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.9:/c/Users/janba/AppData/Local/Microsoft/WindowsApps:/c/Users/janba/AppData/Local/Programs/Microsoft VS Code/bin:/usr/bin:/mingw/bin:/c/Users/janba/AppData/Roaming/npm:/c/Users/janba/.dotnet/tools:.
 # environment
@@ -78,7 +78,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_15644_FJYSDLFRZGZCOEJP
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_24156_BKVISDYGAAKRAORU
 # environment
 COMPUTERNAME = DESKTOP-3AAR4JN
 # environment
@@ -168,8 +168,6 @@ SYSTEMROOT = C:\WINDOWS
 # environment
 APPDATA = C:\Users\janba\AppData\Roaming
 # environment
-__COMPAT_LAYER = DetectorsAppHealth
-# environment
 TEMP = /tmp
 # environment
 COMSPEC = C:\WINDOWS\system32\cmd.exe
@@ -195,17 +193,16 @@ PROCESSOR_REVISION = 7100
 MAKELEVEL := 0
 # environment
 LANG = C
- 
 # environment
 PROCESSOR_LEVEL = 23
 # environment
 TERM = cygwin
 # environment
-VSCODE_PID = 15644
+VSCODE_PID = 24156
 # environment
 USERDOMAIN_ROAMINGPROFILE = DESKTOP-3AAR4JN
 # variable set hash-table stats:
-# Load=94/1024=9%, Rehash=0, Collisions=9/119=8%
+# Load=93/1024=9%, Rehash=0, Collisions=9/118=8%
 
 # Pattern-specific Variable Values
 
@@ -213,9 +210,9 @@ USERDOMAIN_ROAMINGPROFILE = DESKTOP-3AAR4JN
 
 # Directories
 
-# . (device -13143, inode 1032615): 12 files, no impossibilities.
+# . (device -13143, inode 1032615): 15 files, no impossibilities.
 
-# 12 files, no impossibilities in 1 directories.
+# 15 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -227,6 +224,7 @@ USERDOMAIN_ROAMINGPROFILE = DESKTOP-3AAR4JN
 all:
 #  Command-line target.
 #  Implicit rule search has been done.
+ 
 #  File does not exist.
 #  File has not been updated.
 # variable set hash-table stats:
@@ -241,7 +239,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-08 16:32:32
+#  Last modified 2022-07-09 10:51:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -252,7 +250,7 @@ word:
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 8):
-	$(CC) $(IN_WORD) -o wgen $(CFLAGS)  
+	$(CC) $(IN_WORD) markov.c -o wgen $(CFLAGS)  
 	
 
 sent:
@@ -260,7 +258,7 @@ sent:
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 11):
-	$(CC) $(IN_SENT) -o sgen $(CFLAGS)
+	$(CC) $(IN_SENT) markov.c -o sgen $(CFLAGS)
 	
 
 # Not a target:
@@ -282,6 +280,6 @@ sent:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Jul  8 16:33:16 2022
+# Finished Make data base on Sat Jul  9 10:51:32 2022
 
  

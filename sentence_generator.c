@@ -3,31 +3,12 @@
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
+#include "markov.h"
 
-#define BUF_SIZE 2048
-#define WORD_LEN 40
 #define MAX_INPUT_SIZE 0xffff 
-#define DELIM " \n\t"
-
 #define rnd_float() ((rand() % RAND_MAX)/(float)RAND_MAX)
 
-int toIndex(char* word, char wset[BUF_SIZE][WORD_LEN], int set_index){
-    for (int i = 0; i < set_index; i++){
-        if (strcmp(wset[i], word) == 0){
-            return i;
-        }
-    }
-    return -1;
-}
-
-int contains(char* word, char c){
-    for (int i = 0; word[i] != '\0'; i++){
-        if (word[i] == c) return 1;
-    }
-    return 0;
-}
-
-int string_to_int(char* str){
+int string_to_int(const char* str){
     int res = 0;
     for (int i = 0; str[i] != '\0'; i++){
         if (str[i] < '0' || str[i] > '9'){
@@ -56,82 +37,35 @@ int main(int argc, char** argv){
     int max_sentences = string_to_int(*++argv);
 
     srand(time(NULL));
-    FILE* f = fopen(file_path, "r");
     char text[MAX_INPUT_SIZE];
-    size_t len = fread(text, sizeof(char), MAX_INPUT_SIZE, f);
-    text[len] = '\0';
-    fclose(f);
+    read_file(file_path, text, MAX_INPUT_SIZE);
     
     // string buffer
-    char buffer[BUF_SIZE][WORD_LEN];
+    char* buffer[BUF_SIZE];
     int buf_index = 0;
-    
+
     // set of words (no duplicates)
-    char word_set[BUF_SIZE][WORD_LEN];
+    char* word_set[BUF_SIZE];
     int set_index = 0;
 
-    // splitting the input string with delimers
-    char* token;
-    token = strtok(text, DELIM);
-
-    while (token != NULL && buf_index < BUF_SIZE){
-
-        strcpy(buffer[buf_index], token);
-        buf_index++;
-
-        // check if token already in word set
-        if (toIndex(token, word_set, set_index) != -1){
-            token = strtok(NULL, DELIM);
-            continue;
-        }
-        
-        // if not found in word set, copy word to set
-        strcpy(word_set[set_index], token);
-        set_index++;
-
-        token = strtok(NULL, DELIM);
-    }
-    
-    // alloc state transition matrix
-    float** trans_matrix = (float**)malloc(set_index * sizeof(float*));
-    for (int i = 0; i < set_index; i++) trans_matrix[i] = (float*)calloc(set_index, sizeof(float));
-
-    // adjusting weights in transition matrix
-    for (int i = 0; i < buf_index-1; i++){
-        trans_matrix
-            [toIndex(buffer[i], word_set, set_index)]
-            [toIndex(buffer[i+1], word_set, set_index)]++;
-    }
-
-    // evaluate weights
-    for (int i = 0; i < set_index; i++){
-        float sum = 0.0f;
-        for (int j = 0; j < set_index; j++){
-            sum += trans_matrix[i][j];
-        }
-        if (sum == 0) continue; 
-        for (int j = 0; j < set_index; j++){
-            trans_matrix[i][j] = trans_matrix[i][j]/sum;
-        }
-    }
+    // split raw input string in buffer of words and set of words
+    split_input_text(text, DELIM, buffer, &buf_index, word_set, &set_index);
+    // create transition matrix of the size of word_set
+    float** trans_matrix = create_transition_matrix(set_index);
+    // train model on order of words in buffer
+    train_model(trans_matrix, buffer, buf_index, word_set, set_index);
+    // normalize weights in range(0, 1)
+    normalize_model(trans_matrix, set_index);
 
     if (debug){
-        printf("\n--------------------------------------------------\nFilepath: \t\t%s\n# generated sentences: \t%d\nDebug mode: \t\t%s\n--------------------------------------------------\n", 
+        printf("\n--------------------------------------------------\n");
+        printf("Filepath: \t\t%s\n# generated sentences: \t%d\nDebug mode: \t\t%s", 
         file_path, max_sentences, debug ? "true" : "false");
-
-        // debug print transition matrix
-        for (int i = 0; i < set_index; i++) printf("    %2d", i);
-        printf("\n");
-        for (int i = 0; i < set_index; i++){
-            printf("%2d| ", i);
-            for (int j = 0; j < set_index; j++){
-                printf("%2.2f  ", trans_matrix[i][j]);
-            }
-            printf("\n");
-        }
+        printf("\n--------------------------------------------------\n");
+        // print transition matrix as table
+        print_model(trans_matrix, set_index);
     }
 
-    // Generate sentence based on markov chain model
     // determine first state
     int state = 0;
     for (int i = 0; i < set_index; i++){
@@ -144,9 +78,11 @@ int main(int argc, char** argv){
     int done = 0;
     int num_sentences = 0;
     printf("%s ", word_set[state]);
+    // if state has no further transitions, break
+    // if end of sentence is encountered ('.' or '\n') increment num_sentences
     while(!done){
         // if end of sentence
-        if (contains(word_set[state], '.') || contains(word_set[state], '\n')) {
+        if (contains_char(word_set[state], '.') || contains_char(word_set[state], '\n')) {
             num_sentences++;
             if (num_sentences >= max_sentences) break;
         }
@@ -164,9 +100,6 @@ int main(int argc, char** argv){
         done = !selected;
     }
 
-    // free transition matrix
-    for (int i = 0; i < set_index; i++) free(trans_matrix[i]);
-    free(trans_matrix);
-
+    destroy_transition_matrix(trans_matrix, set_index);
     return 0;
 }
