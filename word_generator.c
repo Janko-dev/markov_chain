@@ -4,13 +4,12 @@
 #include <time.h>
 
 #define CHAR_SET 27
-#define WORD_LEN 12
-
 #define rnd_float() ((rand() % RAND_MAX)/(float)RAND_MAX)
+
 
 int asIndex(char c){
     if (c == '\n') return CHAR_SET-1;
-    return c - 'a';
+    return ((int)c) - 'a';
 }
 
 int string_to_int(char* str){
@@ -25,52 +24,26 @@ int string_to_int(char* str){
     return res;
 }
 
-int main(int argc, char** argv){
-    
-    if (argc < 3) {
-        fprintf(stderr, "Please provide the necessary amount of arguments\n");
-        exit(1);
-    }
-
-    int debug = 0;
-    char* file_path;
-    int num_words_generated; 
-    argv++;
-    while(--argc > 0){
-        if (strcmp("-d", *argv) == 0){
-            debug = 1;
-            argv++;
-        } else {
-            file_path = *argv;
-            argv++; argc--;
-            num_words_generated = string_to_int(*argv);
-        }
-    }
-    
-    // Setup transition matrix
-    srand(time(NULL));
-    float transition_matrix[CHAR_SET][CHAR_SET] = {{0}};
-    
-    // Read trainig data
-    FILE* f = fopen(file_path, "r");
+size_t max_line_len = 128; 
+void train_model(const char* filepath, float transition_matrix[CHAR_SET][CHAR_SET]){
+    FILE* f = fopen(filepath, "r");
     if (f == NULL){
-        fprintf(stderr, "Can't open file with given path: %s\n", file_path);
+        fprintf(stderr, "Can't open file with given path: %s\n", filepath);
         exit(1);
     }
-    size_t buf_size = 128;
-    char* input = (char*)malloc(sizeof(char) * buf_size);
+    char* input = (char*)malloc(sizeof(char) * max_line_len);
     size_t characters;
 
     // training stage
-    while((characters = getline(&input, &buf_size, f)) < buf_size){
-        //printf("%s", input);
+    while((characters = getline(&input, &max_line_len, f)) < max_line_len){
         for (int i = 0; (input[i+1] > 'a' && input[i+1] < 'z') || input[i+1] == '\n'; i++){
             transition_matrix[asIndex(input[i])][asIndex(input[i+1])]++;
         }
     }
     fclose(f);
+}
 
-    // evaluate
+void normalize_weights(float transition_matrix[CHAR_SET][CHAR_SET]){
     for (int i = 0; i < CHAR_SET; i++){
         float sum = 0.0f;
         for (int j = 0; j < CHAR_SET; j++){
@@ -81,33 +54,27 @@ int main(int argc, char** argv){
             transition_matrix[i][j] = transition_matrix[i][j]/sum;
         }
     }
+}
 
-    // print
-    if (debug){
-        printf("\n--------------------------------------------------\n");
-        printf("Filepath: \t\t%s\n# of generated words: \t%d\nDebug mode: \t\t%s",
-        file_path, num_words_generated, debug ? "true" : "false");
-        printf("\n--------------------------------------------------\n");
-        
-        for (int i = 0; i < CHAR_SET; i++) 
-            i == CHAR_SET-1 ? printf("    \\n") : printf("    %c", i + 'a');
-        printf("\n");
-        for (int i = 0; i < CHAR_SET; i++){
-            i == CHAR_SET-1 ? printf("\\n |") : printf("%c  |", i + 'a');
-            for (int j = 0; j < CHAR_SET; j++){
-                printf("%2.2f ", transition_matrix[i][j]);
-            }
-            printf("\n");
+void print_model_matrix(float transition_matrix[CHAR_SET][CHAR_SET]){
+    for (int i = 0; i < CHAR_SET; i++) 
+        i == CHAR_SET-1 ? printf("    \\n") : printf("    %c", i + 'a');
+    printf("\n");
+    for (int i = 0; i < CHAR_SET; i++){
+        i == CHAR_SET-1 ? printf("\\n |") : printf("%c  |", i + 'a');
+        for (int j = 0; j < CHAR_SET; j++){
+            printf("%2.2f ", transition_matrix[i][j]);
         }
+        printf("\n");
     }
+}
 
-    // generate words of length word_len
+void generate_random_words(float transition_matrix[CHAR_SET][CHAR_SET], int num){
     printf("\n--------------------------------------------------\n");
-    char string_buffer[buf_size];
+    char string_buffer[max_line_len];
 
-    for (int k = 0; k < num_words_generated; k++){
+    for (int k = 0; k < num; k++){
         int state = rand()%(CHAR_SET-1);
-        //printf("START: %c(%d) ", state + 'a', state);
         string_buffer[0] = state + 'a';
         int i = 1;
         for (; state != CHAR_SET-1; i++){
@@ -115,9 +82,7 @@ int main(int argc, char** argv){
             for (int j = 0; j < CHAR_SET; j++){
                 if (rnd_choice < transition_matrix[state][j]){
                     state = j;
-                    //printf("%c(%d) ", state + 'a', state);
                     if (state == CHAR_SET-1) goto end;
-                    
                     string_buffer[i] = (char)state + 'a';
                     break;
                 }
@@ -128,15 +93,41 @@ int main(int argc, char** argv){
         string_buffer[i] = '\0';
         printf("generated word %2d:\t%s\n", k+1, string_buffer);
     }
+}
 
-    // hellolopez
-    // he -> ll
-    // el -> lo
-    // ll -> ol
-    // lo -> lo
-    // ol -> op
-    // lo -> pe
-    // op -> ez
+int main(int argc, char** argv){
+    
+    srand(time(NULL));
+    if (argc < 3) {
+        fprintf(stderr, "Please provide the necessary amount of arguments\n");
+        exit(1);
+    }
 
+    ++argv;
+    int debug = 0;
+    if (strcmp(*argv, "-d") == 0){
+        debug = 1;
+        ++argv;
+    }
+    char* file_path = *argv;
+    int num_words_generated = string_to_int(*++argv);
+
+
+    float transition_matrix[CHAR_SET][CHAR_SET] = {{0}};
+    train_model(file_path, transition_matrix);
+    normalize_weights(transition_matrix);
+
+    // debug print
+    if (debug){
+        printf("\n--------------------------------------------------\n");
+        printf("Filepath: \t\t%s\n# of generated words: \t%d\nDebug mode: \t\t%s",
+        file_path, num_words_generated, debug ? "true" : "false");
+        printf("\n--------------------------------------------------\n");
+        
+        print_model_matrix(transition_matrix);
+    }
+
+    generate_random_words(transition_matrix, num_words_generated);
+    
     return 0;
 }

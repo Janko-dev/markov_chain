@@ -10,7 +10,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 make.exe: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Sat Jul  9 11:25:14 2022
+# Make data base, printed on Mon Jul 11 14:15:06 2022
 
 # Variables
 
@@ -18,9 +18,9 @@ make.exe: *** No rule to make target `all'.  Stop.
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
+ 
 # makefile
 MAKEFLAGS = Rrqp
- 
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
@@ -59,6 +59,8 @@ VSCODE_CWD = C:\Users\janba\C-dev\Markov_Chain
 PATH = /c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/c/Program Files/Microsoft/jdk-11.0.12.7-hotspot/bin:/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/c/WINDOWS/system32:/c/WINDOWS:/c/WINDOWS/System32/Wbem:/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/c/WINDOWS/System32/OpenSSH/:/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/c/Program Files/Git/cmd:/c/Program Files/Docker/Docker/resources/bin:/c/ProgramData/DockerDesktop/version-bin:/c/Program Files/nodejs/:/c/Program Files/dotnet/:/mingw/bin:/usr/bin:/c/Program Files/Git LFS:/c/Users/janba/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.9:/c/Users/janba/AppData/Local/Microsoft/WindowsApps:/c/Users/janba/AppData/Local/Programs/Microsoft VS Code/bin:/usr/bin:/mingw/bin:/c/Users/janba/AppData/Roaming/npm:/c/Users/janba/.dotnet/tools:.
 # environment
 COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# makefile (from `Makefile', line 5)
+IN_NGRAM = ngram_word_generator.c
 # environment
 GIT_LFS_PATH = C:\Program Files\Git LFS
 # environment
@@ -78,7 +80,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_24156_BKVISDYGAAKRAORU
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_23268_CQOBLPJUZGZEQWMG
 # environment
 COMPUTERNAME = DESKTOP-3AAR4JN
 # environment
@@ -123,7 +125,7 @@ CC = gcc
 MAKE_VERSION := 3.81
 # makefile
 .DEFAULT_GOAL := word
-# makefile (from `Makefile', line 5)
+# makefile (from `Makefile', line 6)
 IN_SENT = sentence_generator.c
 # environment
 PROGRAMFILES(X86) = C:\Program Files (x86)
@@ -188,6 +190,7 @@ SESSIONNAME = Console
 # environment
 PROCESSOR_REVISION = 7100
 # default
+ 
 .INCLUDE_DIRS = /usr/include /usr/include
 # environment
 MAKELEVEL := 0
@@ -198,14 +201,13 @@ PROCESSOR_LEVEL = 23
 # environment
 TERM = cygwin
 # environment
-VSCODE_PID = 24156
+VSCODE_PID = 23268
 # environment
 USERDOMAIN_ROAMINGPROFILE = DESKTOP-3AAR4JN
 # variable set hash-table stats:
-# Load=93/1024=9%, Rehash=0, Collisions=9/118=8%
+# Load=94/1024=9%, Rehash=0, Collisions=9/119=8%
 
 # Pattern-specific Variable Values
- 
 
 # No pattern-specific variable values.
 
@@ -239,7 +241,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-09 11:25:11
+#  Last modified 2022-07-11 14:14:10
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -249,7 +251,7 @@ word:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 8):
+#  commands to execute (from `Makefile', line 9):
 	$(CC) $(IN_WORD) -o wgen $(CFLAGS)  
 	
 
@@ -257,8 +259,16 @@ sent:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 11):
-	$(CC) $(IN_SENT) markov_sentence.c -o sgen $(CFLAGS)
+#  commands to execute (from `Makefile', line 15):
+	$(CC) $(IN_SENT) -o sgen $(CFLAGS)
+	
+
+ngram_word:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 12):
+	$(CC) $(IN_NGRAM) -o ngram $(CFLAGS)  
 	
 
 # Not a target:
@@ -268,7 +278,7 @@ sent:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/17=0%
+# Load=7/1024=1%, Rehash=0, Collisions=0/18=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -280,6 +290,6 @@ sent:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Jul  9 11:25:14 2022
+# Finished Make data base on Mon Jul 11 14:15:06 2022
 
  
