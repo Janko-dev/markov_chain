@@ -12,7 +12,7 @@ The datasets folder contains example datasets to be used when running the execut
 ## Quick start word generator
 ---
 ```
-$ git clone https://github.com/Janko-dev/Markov_Chain.git
+$ git clone https://github.com/Janko-dev/markov_chain.git
 $ make word
 $ ./wgen -d <filepath> <num_generated_words>
 ```
@@ -23,7 +23,7 @@ $ ./wgen -d <filepath> <num_generated_words>
 ## Quick start sentence generator
 ---
 ```
-$ git clone https://github.com/Janko-dev/Markov_Chain.git
+$ git clone https://github.com/Janko-dev/markov_chain.git
 $ make sent
 $ ./sgen -d <filepath> <num_generated_sentences>
 ```
@@ -34,7 +34,7 @@ $ ./sgen -d <filepath> <num_generated_sentences>
 ## Quick start n-gram word generator
 ---
 ```
-$ git clone https://github.com/Janko-dev/Markov_Chain.git
+$ git clone https://github.com/Janko-dev/markov_chain.git
 $ make ngram_word
 $ ./ngram -d <filepath> <num_generated_words> <n> <max_length>
 ```
